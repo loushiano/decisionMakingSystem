@@ -4,10 +4,11 @@ first you need to download the following python packages:
 
 
 AirSim:
-If you want to work with AirSim, you have to download an environmnet from their main repository here.
-After you download the simulation environment, all you need to do is to run our program.
-if the connection fails between our program and the simulation environment, follow the steps mentioned here.
-We are working with the cinty Environment in their realease version.
+If you want to work with AirSim, you have to download an environmnet from their main repository. To download 
+the simulation environmnet you must go [here](https://github.com/Microsoft/AirSim/releases).
+After you downloading the simulation environment, all you need to do is to run the environment then our program.
+We are currently working with the cinty Environment provided by AirSim in the realase version v.1.1.7.
+If you want to use an environment built on the Unreal Version but that is not provided by AirSim, follow this [tutorial](https://www.youtube.com/watch?v=y09VbdQWvQY)
 
 TrueVision:
 
@@ -15,5 +16,5 @@ TrueVision:
 
 
 OtherEnvironments:
-If you want to work on or test our program with another simulation environment, you have to create another AdapterEnvironment concrete class that inherits from our AdapterEnvironment, and make the right connections, or write a compatible interface between the environment you chose and our program. Make sure you only implement the methods that we have defined in the abstract class AdapterEnvironment.
+If you want to work on or test our program with another simulation environment, you have to create another AdapterEnvironment concrete class that inherits from our AdapterEnvironment class, and make the right connections, or write a compatible interface between the environment you chose and our program. Make sure you only implement the methods that we have defined in the abstract class AdapterEnvironment.
 
