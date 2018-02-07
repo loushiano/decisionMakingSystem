@@ -30,8 +30,10 @@ class EnvironmentInterface(ABC):
     @abstractmethod
     def setBreak(self,value):
         pass
-    
-    
+    #this method records from the environment images while the user is driving the car manually in the environment
+    @abstractmethod
+    def recordImages(self,fileName):
+        pass
 
     
     
