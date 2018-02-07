@@ -6,7 +6,8 @@ first you need to download the following python packages:
 AirSim:
 If you want to work with AirSim, you have to download an environmnet from their main repository. To download 
 the simulation environmnet you must go [here](https://github.com/Microsoft/AirSim/releases).
-After you downloading the simulation environment, all you need to do is to run the environment then our program.
+After you finish downloading the simulation environment, all you need to do is to run the environment then to run our program.
+not that you must import the Python client package from the airsim source code.
 We are currently working with the cinty Environment provided by AirSim in the realase version v.1.1.7.
 If you want to use an environment built on the Unreal Version but that is not provided by AirSim, follow this [tutorial](https://www.youtube.com/watch?v=y09VbdQWvQY)
 
