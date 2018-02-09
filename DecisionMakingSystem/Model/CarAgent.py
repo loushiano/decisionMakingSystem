@@ -8,10 +8,14 @@ import interface.AirSimInterface as environment
 from PIL import Image
 class CarAgent():
     simEnv= environment.AirSimConnection()
-
+    
     def driveAI(self):
         while(True):
             self.doSomething(self.simEnv.getSensoryData())
-    def doSomething(self,Image):
+    
+    
+    def doSomething(self,image):
         return
             
+    def recordFromEnvironment(self,image,fileName,csvFileName=None):
+        self.simEnv.recordImages(image, fileName, csvFileName)

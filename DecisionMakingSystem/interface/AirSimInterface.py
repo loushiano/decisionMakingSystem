@@ -16,9 +16,10 @@ class AirSimConnection(EnvironmentInterface):
     client = CarClient()
     car_controls = CarControls()
     
-    def connectToEnvironment(self):
+    def connectToEnvironment(self,value=True):
         self.client.confirmConnection()
-        self.enableApi(True)
+        self.enableApi(value)
+    
         
     def getSensoryData(self):
         rawImage = self.client.simGetImage(1, AirSimImageType.Scene)
@@ -39,10 +40,9 @@ class AirSimConnection(EnvironmentInterface):
     def setBreak(self,value):
         self.car_controls.brake=value
         self.client.setCarControls(self.car_controls)
-    def recordImages(self,fileName,i):
-        self.getSensoryData().save(fileName+str(i)+".png")
+    
     def enableApi(self,value):
         self.client.enableApiControl(value)
 
 
-    
+
