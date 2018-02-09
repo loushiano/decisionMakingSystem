@@ -6,16 +6,27 @@ this is the car Agent Class the makes decision on inputs that it receives when t
 '''
 import interface.AirSimInterface as environment
 from PIL import Image
+import PIL
+from Model.Handlers import *
+
 class CarAgent():
+    dTypeImage={PIL.Image.Image:'PILIMAGE'}
     simEnv= environment.AirSimConnection()
+    imd=ImageDataHandler()
+    
     
     def driveAI(self):
-        while(True):
-            self.doSomething(self.simEnv.getSensoryData())
+        
+        
+        self.simEnv.connectToEnvironment(False)
+        img= self.simEnv.getSensoryData()
+        
     
     
-    def doSomething(self,image):
-        return
+    
             
     def recordFromEnvironment(self,image,fileName,csvFileName=None):
         self.simEnv.recordImages(image, fileName, csvFileName)
+
+x= CarAgent()
+x.driveAI()

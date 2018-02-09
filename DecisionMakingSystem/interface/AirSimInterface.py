@@ -4,7 +4,7 @@ Created on Feb 6, 2018
 @author: Owner
 this class inherits from the EnvironmentConnection abstract class, and it plays the role of an interface between airsim environments and the car agent
 '''
-from ConnectionModule import EnvironmentInterface
+from interface.ConnectionModule import EnvironmentInterface
 
 from PythonClient import AirSimClient
 from PythonClient.AirSimClient import *
