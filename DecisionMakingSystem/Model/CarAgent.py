@@ -16,7 +16,7 @@ class CarAgent():
     
     
     def driveAI(self):
-        
+        handlerUtil[self.dTypeImage[PIL.Image.Image]].describe(1)
         
         self.simEnv.connectToEnvironment(False)
         img= self.simEnv.getSensoryData()
