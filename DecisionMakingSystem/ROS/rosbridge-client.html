@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/EventEmitter/5.2.4/EventEmitter.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/roslibjs/0.19.0/roslib.min.js"></script>
+
+<!-- Bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<script type="text/javascript" type="text/javascript">
+  
+    // Connecting to ROS
+    // -----------------
+    // Enter the ip address of the system on which ROS is runnnig
+    // If ROS is running locally then leave it as localhost or 127.0.0.1
+    var ros = new ROSLIB.Ros({
+        url : 'ws://172.19.16.177:9090'
+    });
+    
+    ros.on('connection', function() {
+        console.log('Connected to websocket server.');
+    });
+
+    ros.on('error', function(error) {
+        console.log('Error connecting to websocket server: ', error);
+    });
+
+    ros.on('close', function() {
+        console.log('Connection to websocket server closed.');
+    });    
+
+    // Subscribing to a Topic
+    // ----------------------
+
+    // We are listening to the steering angle 
+    // as published by the simulator
+    var steeringListener = new ROSLIB.Topic({
+        ros : ros,
+        name : '/truevision/steering_report',
+        messageType : 'std_msgs/Float32'
+    });
+
+    steeringListener.subscribe(function(message) {
+        console.log('Received message on ' + steeringListener.name + ': ' + message.data);        
+    });
+
+    // We are listening to the throttle report 
+    // as published by the simulator
+    var throttleListener = new ROSLIB.Topic({
+        ros : ros,
+        name : '/truevision/throttle_report',
+        messageType : 'std_msgs/Float32'
+    });
+
+    throttleListener.subscribe(function(message) {
+        //console.log('Received message on ' + throttleListener.name + ': ' + message.data);        
+    });    
+
+    // Example code to unsubscribe to a topic
+    // listener.unsubscribe();
+
+    // Publishing to topics
+    // -------------------
+
+    // Increase the speed of the car
+    // -------------------
+    function changeThrottle()
+    {
+        // We need to create a message which can be sent 
+        // on the topic
+        // I am hardcoding the value, but you
+        // can change this as per your need
+        // most likely some alogrithms in your system will determine this
+        var throttleMessage = new ROSLIB.Message({
+            data : 0.10000000
+        });
+
+        throttleTopic.publish(throttleMessage);
+    }
+
+    // This creates a new topic is it does not already exists
+    // And return the instance of topic of further use
+    var throttleTopic = new ROSLIB.Topic({
+        ros : ros,
+        name : '/truevision/throttle_cmd',
+        messageType : 'std_msgs/Float32'
+    });    
+
+    // Control the steering
+    // -------------------
+    function changeSteering(angle)
+    {
+        // We need to create a message which can be sent 
+        // on the topic
+        // I am hardcoding the value, but you
+        // can change this as per your need
+        // most likely some alogrithms in your system will determine this        
+        var steeringMessage = new ROSLIB.Message({
+            data : angle
+        });
+
+        steeringTopic.publish(steeringMessage);
+    }  
+
+    // This creates a new topic is it does not already exists
+    // And return the instance of topic of further use
+    var steeringTopic = new ROSLIB.Topic({
+        ros : ros,
+        name : '/truevision/steering_cmd',
+        messageType : 'std_msgs/Float32'
+    });
+
+    
+
+</script>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="header clearfix">
+      <nav>
+        <ul class="nav nav-pills pull-right">
+          <li role="presentation" class="active"><a href="#"></a></li>
+          <li role="presentation"><a href="#"></a></li>
+          <li role="presentation"><a href="#"></a></li>
+        </ul>
+      </nav>
+      <h3 class="text-muted"></h3>
+    </div>
+    
+    <div class="jumbotron">
+        <h1> roslibjs </h1>
+        <p> Web Console: output.</p>          
+        <p class="lead">steering</p>
+        <p>
+            <a class="btn btn-lg btn-success" onclick="changeSteering(-0.5)" href="#" role="button">Go Left</a>
+            <a class="btn btn-lg btn-success" onclick="changeSteering(0.5)" href="#" role="button">Go Right</a>
+        </p>    
+        
+        <p class="lead">throttle</p>
+        <p>
+            <a class="btn btn-lg btn-success" onclick="changeThrottle()" href="#" role="button">Accelerate</a>
+        </p>              
+    </div>
+  </div> <!-- /container -->
+
+
+</body>
+</html>
