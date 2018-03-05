@@ -92,11 +92,7 @@
     // -------------------
     function changeSteering(angle)
     {
-        // We need to create a message which can be sent 
-        // on the topic
-        // I am hardcoding the value, but you
-        // can change this as per your need
-        // most likely some alogrithms in your system will determine this        
+                
         var steeringMessage = new ROSLIB.Message({
             data : angle
         });
